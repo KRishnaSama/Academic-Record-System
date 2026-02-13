@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Add Course</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-page admin-page">
+
+  <div class="dashboard-container">
+
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>Admin Panel</h2>
+      </div>
+
+      <nav>
+        <a href="/admin-dashboard-redesigned">Dashboard</a>
+        <a href="/add-user" >Add User</a>
+        <a href="/add-course" class="active">Add Course</a>
+        <a href="/add-marks">Add Marks</a>
+        <a href="/view-marks">View Records</a>
+        <a href="/logout" class="logout">Logout</a>
+      </nav>
+
+    </aside>
+
+    <main class="dashboard-content">
+
+      <div class="form-card-wrapper">
+
+        <h1>Add Course</h1>
+        <p class="subtitle">Create a new course</p>
+
+        <div class="records-card">
+
+          <form method="POST" class="login-form">
+            <div class="floating-field">
+              <input type="text" name="course_name" required>
+              <label>Course Name</label>
+            </div>
+
+            <button type="submit">Add Course</button>
+          </form>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+
+
+</html>

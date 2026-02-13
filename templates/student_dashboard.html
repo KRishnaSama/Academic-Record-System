@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-page student-live-bg">
+
+  <div class="student-dashboard-container">
+
+    <h1>Welcome, {{ student }}</h1>
+    <p class="subtitle">Your Academic Records</p>
+
+    <div class="overall-result {{ overall_result | lower }}">
+      Overall Result: {{ overall_result }}
+      <div class="soft-divider"></div>
+    </div>
+
+    <div class="progress-ring-wrapper">
+
+      <div class="progress-ring" style="--progress: {{ average_marks }};">
+        <div class="progress-value">
+          {{ average_marks }}%
+        </div>
+      </div>
+
+      <div class="progress-label">
+        Overall Performance
+      </div>
+
+    </div>
+
+    <div class="student-summary">
+
+      <div class="summary-item">
+        <span class="summary-label">Subjects</span>
+        <span class="summary-value">{{ records|length }}</span>
+      </div>
+
+      <div class="summary-item">
+        <span class="summary-label">Average Marks</span>
+        <span class="summary-value">{{ average_marks }}</span>
+      </div>
+
+      <div class="summary-item">
+        <span class="summary-label">Best Subject</span>
+        <span class="summary-value">{{ best_subject }}</span>
+      </div>
+
+    </div>
+
+    <div class="records-card">
+      <table class="records-table">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Marks</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in records %}
+          <tr>
+            <td>{{ row.course_name }}</td>
+            <td>{{ row.marks }}</td>
+            <td class="status {{ row.status | lower }}">
+              {{ row.status }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <a href="/login" class="logout-btn">Logout</a>
+
+  </div>
+
+  <!-- live wallpaper :) -->
+  <video autoplay muted loop id="student-bg-video">
+    <source src="{{ url_for('static', filename='videos/dashboard-bg.mp4') }}" type="video/mp4">
+  </video>
+
+</body>
+
+</html>

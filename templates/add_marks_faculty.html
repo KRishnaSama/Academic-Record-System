@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Marks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-page faculty-page">
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Faculty Panel</h2>
+            </div>
+
+            <nav>
+                <a href="/faculty-dashboard">Dashboard</a>
+                <a href="/add-marks" class="active">Add Marks</a>
+                <a href="/view-marks">View Records</a>
+                <a href="/logout" class="logout">Logout</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-content">
+
+            <div class="form-card-wrapper">
+                <h1>Add Marks</h1>
+                <p class="subtitle">Enter student marks</p>
+
+                <div class="records-card">
+
+                    <form method="POST" class="login-form">
+
+                        <div class="floating-field">
+                            <input type="text" name="student_username" required>
+                            <label>Student Username</label>
+                        </div>
+
+                        <div class="floating-field">
+                            <input type="text" name="course_name" required>
+                            <label>Course Name</label>
+                        </div>
+
+                        <div class="floating-field">
+                            <input type="number" name="marks" required>
+                            <label>Marks</label>
+                        </div>
+
+                        <button type="submit">Save Marks</button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <video autoplay muted loop id="faculty-bg-video">
+        <source src="{{ url_for('static', filename='videos/dashboard-bg.mp4') }}" type="video/mp4">
+    </video>
+
+</body>
+
+</html>

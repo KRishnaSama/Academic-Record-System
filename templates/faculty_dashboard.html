@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Faculty Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-page faculty-page">
+
+  <div class="dashboard-container">
+
+    <aside class="sidebar">
+      <h2 class="logo">Faculty Panel</h2>
+      <nav>
+        <a href="/faculty-dashboard" class="nav-link active">Dashboard</a>
+        <a href="/add-marks" class="nav-link">Add Marks</a>
+        <a href="/view-marks" class="nav-link">View Records</a>
+        <a href="/logout" class="nav-link logout">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="dashboard-content">
+
+      <div class="dashboard-header">
+        <h1>Welcome, Faculty</h1>
+        <p class="subtitle">Manage student marks and academic records</p>
+      </div>
+
+      <div class="card-grid">
+
+        <div class="dash-card">
+          <h3>Upload Marks</h3>
+          <p>Enter or update marks for your students.</p>
+          <a href="/add-marks" class="btn">Open</a>
+        </div>
+
+        <div class="dash-card">
+          <h3>View Student Records</h3>
+          <p>Check student performance and reports.</p>
+          <a href="/view-marks" class="btn">Open</a>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <video autoplay muted loop id="faculty-bg-video">
+    <source src="{{ url_for('static', filename='videos/dashboard-bg.mp4') }}" type="video/mp4">
+  </video>
+
+</body>
+
+</html>

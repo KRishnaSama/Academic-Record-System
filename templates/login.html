@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login - Academic Record Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="login-page">
+
+    <div class="login-wrapper">
+
+        <div class="login-box split">
+
+            <div class="login-brand">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Academic Record System">
+                <h3></h3>
+            </div>
+
+            <div class="login-form-area">
+                <p class="login-subtitle">Login to your account</p>
+
+                {% if error %}
+                <div class="error-box">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form class="login-form {% if error %}has-error{% endif %}" method="POST" action="/login">
+
+                    <div class="floating-field">
+                        <input type="text" name="username" required>
+                        <label>Username</label>
+                    </div>
+
+                    <div class="password-group">
+
+                        <div class="floating-field">
+                            <input type="password" name="password" id="password" required>
+                            <label>Password</label>
+                            <span class="toggle-password" id="togglePassword">👁</span>
+                        </div>
+
+                        <div class="password-strength">
+                            <span id="strengthText">Strength:</span>
+                            <span id="strengthLevel">—</span>
+                        </div>
+
+                        <div class="password-tooltip" id="passwordTooltip">
+                            <p>Password must contain:</p>
+                            <ul>
+                                <li id="rule-length">At least 6 characters</li>
+                                <li id="rule-upper">One uppercase letter</li>
+                                <li id="rule-number">One number</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- ROLE (CUSTOM DROPDOWN) -->
+                    <div class="floating-field custom-select" id="roleSelect">
+
+                        <div class="select-display">
+                            <span class="selected-value">Role</span>
+                            <span class="select-arrow">▾</span>
+                        </div>
+
+                        <div class="select-options">
+                            <div class="option" data-value="Admin">Admin</div>
+                            <div class="option" data-value="Faculty">Faculty</div>
+                            <div class="option" data-value="Student">Student</div>
+                        </div>
+
+                        <input type="hidden" name="role" id="roleInput" required>
+                    </div>
+
+                    <!-- REMEMBER ME (YES, RIGHT AFTER ROLE) -->
+                    <div class="remember-row">
+                        <label class="remember-toggle">
+                            <input type="checkbox" name="remember">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="remember-text">Remember me</span>
+                    </div>
+
+                    <!-- LOGIN BUTTON -->
+                    <button type="submit" id="loginBtn">
+                        <span class="btn-text">Login</span>
+                        <span class="btn-spinner"></span>
+                    </button>
+
+                    <div class="forgot-password">
+                        <a href="https://youtu.be/tS92P9PWNfU?t=57" target="_blank" rel="noopener">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <script>
+            const toggle = document.getElementById("togglePassword");
+            const password = document.getElementById("password");
+
+            toggle.addEventListener("click", function () {
+                if (password.type === "password") {
+                    password.type = "text";
+                    toggle.textContent = "🫣"; // or "🙉🫣🙄👁‍🗨"
+                } else {
+                    password.type = "password";
+                    toggle.textContent = "👁";
+                }
+            });
+
+        </script>
+
+        <script>
+            const form = document.querySelector(".login-form");
+            const loginBtn = document.getElementById("loginBtn");
+
+            form.addEventListener("submit", function () {
+                loginBtn.classList.add("loading");
+                loginBtn.disabled = true;
+            });
+        </script>
+
+        <script>
+            const passwordInput = document.getElementById("password");
+            const strengthLevel = document.getElementById("strengthLevel");
+            const passwordGroup = document.querySelector(".password-group");
+            const tooltip = document.getElementById("passwordTooltip");
+
+            const ruleLength = document.getElementById("rule-length");
+            const ruleUpper = document.getElementById("rule-upper");
+            const ruleNumber = document.getElementById("rule-number");
+
+            passwordInput.addEventListener("focus", () => {
+                tooltip.classList.add("show");
+                passwordGroup.classList.add("tooltip-open");
+            });
+
+            passwordInput.addEventListener("blur", () => {
+                tooltip.classList.remove("show");
+                passwordGroup.classList.remove("tooltip-open");
+            });
+
+            passwordInput.addEventListener("input", () => {
+                const value = passwordInput.value;
+
+                /* Strength */
+                let strength = "Weak";
+                let className = "strength-weak";
+
+                if (value.length >= 8 && /[A-Z]/.test(value) && /\d/.test(value)) {
+                    strength = "Strong";
+                    className = "strength-strong";
+                } else if (value.length >= 6) {
+                    strength = "Medium";
+                    className = "strength-medium";
+                }
+
+                strengthLevel.textContent = strength;
+                strengthLevel.className = className;
+
+                /* Rules */
+                ruleLength.classList.toggle("valid", value.length >= 6);
+                ruleUpper.classList.toggle("valid", /[A-Z]/.test(value));
+                ruleNumber.classList.toggle("valid", /\d/.test(value));
+            });
+        </script>
+
+        <script>
+            const roleSelect = document.getElementById("roleSelect");
+            const display = roleSelect.querySelector(".select-display");
+            const selectedValue = roleSelect.querySelector(".selected-value");
+            const options = roleSelect.querySelectorAll(".option");
+            const hiddenInput = document.getElementById("roleInput");
+
+            display.addEventListener("click", () => {
+                roleSelect.classList.toggle("open");
+                display.classList.toggle("active");
+            });
+
+            options.forEach(option => {
+                option.addEventListener("click", () => {
+                    selectedValue.textContent = option.textContent;
+                    hiddenInput.value = option.dataset.value;
+
+                    roleSelect.classList.add("selected"); // 👈 ADD THIS
+                    roleSelect.classList.remove("open");
+                    display.classList.remove("active");
+                });
+            });
+
+            /* Close on outside click */
+            document.addEventListener("click", (e) => {
+                if (!roleSelect.contains(e.target)) {
+                    roleSelect.classList.remove("open");
+                    display.classList.remove("active");
+                }
+            });
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-page">
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <h2 class="logo">Admin Panel</h2>
+
+            <nav>
+                <a href="/admin-dashboard-redesigned" class="nav-link active">Dashboard</a>
+                <a href="/add-user" class="nav-link">Add User</a>
+                <a href="/add-course" class="nav-link">Add Course</a>
+                <a href="/add-marks" class="nav-link">Add Marks</a>
+                <a href="/view-marks" class="nav-link">View Records</a>
+                <a href="/logout" class="nav-link logout">Logout</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-content">
+
+            <div class="dashboard-header">
+                <h1>Welcome, Admin</h1>
+                <p class="subtitle">Manage users, courses and academic records</p>
+            </div>
+
+            <div class="admin-status">
+                <div class="status-item">
+                    <span class="label">System Status</span>
+                    <span class="value online">Online</span>
+                </div>
+
+                <div class="status-item">
+                    <span class="label">Database</span>
+                    <span class="value">Connected</span>
+                </div>
+
+                <div class="status-item">
+                    <span class="label">Last Update</span>
+                    <span class="value">Just now</span>
+                </div>
+            </div>
+
+            <h2 class="section-title">Administrative Controls</h2>
+
+            <div class="card-grid">
+                <div class="dash-card">
+                    <h3>Add User</h3>
+                    <p>Create Admin, Faculty or Student accounts.</p>
+                    <a href="/add-user">Open</a>
+                </div>
+
+                <div class="dash-card">
+                    <h3>Add Course</h3>
+                    <p>Manage courses and subjects.</p>
+                    <a href="/add-course">Open</a>
+                </div>
+
+                <div class="dash-card">
+                    <h3>Add Marks</h3>
+                    <p>Enter and update student marks.</p>
+                    <a href="/add-marks">Open</a>
+                </div>
+
+                <div class="dash-card">
+                    <h3>View Records</h3>
+                    <p>View student performance and reports.</p>
+                    <a href="/view-marks">Open</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- if you want to add a video background, you can uncomment the below code. -->
+    <!-- <video autoplay muted loop id="dashboard-bg-video">
+    <source src="{{ url_for('static', filename='videos/dashboard-bg.mp4') }}" type="video/mp4">
+    </video> -->
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-page admin-page">
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Admin Panel</h2>
+            </div>
+
+            <nav>
+                <a href="/admin-dashboard-redesigned">Dashboard</a>
+                <a href="/add-user" class="active">Add User</a>
+                <a href="/add-course">Add Course</a>
+                <a href="/add-marks">Add Marks</a>
+                <a href="/view-marks">View Records</a>
+                <a href="/logout" class="logout">Logout</a>
+            </nav>
+
+        </aside>
+
+        <main class="dashboard-content">
+
+            <div class="form-card-wrapper">
+
+                <h1>Add New User</h1>
+                <p class="subtitle">Create a new student or faculty account</p>
+
+                <div class="records-card">
+
+                    <form method="POST" class="login-form">
+
+                        <div class="floating-field">
+                            <input type="text" name="username" required>
+                            <label>Username</label>
+                        </div>
+
+                        <div class="floating-field">
+                            <input type="password" name="password" required>
+                            <label>Password</label>
+                        </div>
+
+                        <div class="floating-field">
+                            <select name="role" required>
+                                <option value="" disabled selected></option>
+                                <option>Student</option>
+                                <option>Faculty</option>
+                            </select>
+                            <label>Role</label>
+                        </div>
+
+                        <button type="submit">Add User</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
