@@ -267,7 +267,7 @@ After database initialization, you can add test users manually through the appli
 
 ## License
 
-Developed By Tera Baap 😋
+Developed By Tushar Som
 
 ## Support
 
